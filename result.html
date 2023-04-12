@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Results</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+<body>
+	<nav class="navbar">
+		<a class="navbar-brand" href="index.html">CVD Prediction</a>
+	  </nav>
+	  <div class="container-re">
+		<form>
+			<fieldset>
+			  <legend>Report</legend>
+			  <div class="form-group">
+				<label for="systolic-bp">Your Systolic BP is:</label>
+				<div class="input-group">
+				  <input type="text" class="form-control" id="systolic-bp" name="systolic-bp" placeholder="120 mmHg" value="<?php echo $_GET['systolic-bp']; ?>" readonly>
+				  <div class="input-group-append">
+					<span class="input-group-text"><i class="fas fa-heart"></i></span>
+				  </div>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="diastolic-bp">Your Diastolic BP is:</label>
+				<div class="input-group">
+				  <input type="text" class="form-control" id="diastolic-bp" name="diastolic-bp" placeholder="80 mmHg" value="<?php echo $_GET['diastolic-bp']; ?>" readonly>
+				  <div class="input-group-append">
+					<span class="input-group-text"><i class="fas fa-heart"></i></span>
+				  </div>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="total-cholesterol">Your Total Cholesterol is:</label>
+				<div class="input-group">
+				  <input type="text" class="form-control" id="total-cholesterol" name="total-cholesterol" placeholder="180 mg/dL" value="<?php echo $_GET['total-cholesterol']; ?>" readonly>
+				  <div class="input-group-append">
+					<span class="input-group-text"><i class="fas fa-flask"></i></span>
+				  </div>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="triglycerides">Your Triglycerides are:</label>
+				<div class="input-group">
+				  <input type="text" class="form-control" id="triglycerides" name="triglycerides" placeholder="100 mg/dL" value="<?php echo $_GET['triglycerides']; ?>" readonly>
+				  <div class="input-group-append">
+					<span class="input-group-text"><i class="fas fa-flask"></i></span>
+				  </div>
+				</div>
+			  </div>
+			</fieldset>
+		  </form>
+	  </div>
+	  
+		
+</body>
+</html>
