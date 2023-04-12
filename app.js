@@ -23,7 +23,7 @@ app.post("/submit-form", (req, res) => {
   } = req.body;
 
   // Spawn a new Python process and pass the form data as arguments
-  const pythonProcess = spawn("python", [
+  const trainProcess = spawn("python", [
     "train.py",
     patientId,
     systolicBp,
@@ -32,21 +32,36 @@ app.post("/submit-form", (req, res) => {
     triglycerides,
   ]);
 
-  // Handle the output of the Python process
-  pythonProcess.stdout.on("data", (data) => {
+  // Handle the output of the train.py process
+  trainProcess.stdout.on("data", (data) => {
     console.log(`stdout: ${data}`);
   });
 
-  pythonProcess.stderr.on("data", (data) => {
+  trainProcess.stderr.on("data", (data) => {
     console.error(`stderr: ${data}`);
   });
 
-  pythonProcess.on("close", (code) => {
-    console.log(`child process exited with code ${code}`);
-  });
+  trainProcess.on("close", (trainCode) => {
+    console.log(`train.py exited with code ${trainCode}`);
 
-  // Send a response to the client
-  res.send("Form submitted successfully!");
+    // Spawn a new Python process to run the accuracyCheck.py script
+    const accuracyProcess = spawn("python", ["accuracyCheck.py"]);
+
+    // Handle the output of the accuracyCheck.py process
+    accuracyProcess.stdout.on("data", (data) => {
+      console.log(`accuracyCheck.py stdout: ${data}`);
+    });
+
+    accuracyProcess.stderr.on("data", (data) => {
+      console.error(`accuracyCheck.py stderr: ${data}`);
+    });
+
+    accuracyProcess.on("close", (accuracyCode) => {
+      console.log(`accuracyCheck.py exited with code ${accuracyCode}`);
+      // Send a response to the client
+      res.send("Form submitted successfully!");
+    });
+  });
 });
 
 // Start the server
